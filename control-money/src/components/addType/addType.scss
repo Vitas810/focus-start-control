@@ -1,0 +1,25 @@
+.type-add {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  max-width: 500px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+}
+.type-add__items {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+.type-add__item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.type-add__item img {
+  width: 70px;
+  height: 70px;
+}
+.type-add__title {
+  font-size: 18px;
+}

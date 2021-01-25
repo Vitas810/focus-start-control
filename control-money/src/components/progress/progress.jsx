@@ -1,11 +1,12 @@
 import React from 'react';
-import Button from '../button/button';
+import Button from '../button';
 import './progress.scss';
 import Local from '../../locale';
 
-const Progress = () => {
+const Progress = (props) => {
   const locale = Local.progress;
   const localeBtn = Local.btn;
+  console.log('sssss', props);
   return (
     <div className="progres-types">
       <div className="type-date">
@@ -20,7 +21,7 @@ const Progress = () => {
 
       <div className="summ-block">
         <div className="type-summ">
-          <span className="type-summ__total">1000 Р</span>
+          <span className="type-summ__total">{props.sum}P</span>
           <Button label={localeBtn.add} />
         </div>
       </div>
