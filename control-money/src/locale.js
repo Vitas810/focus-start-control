@@ -12,5 +12,8 @@ const local = {
     add: 'Добавить',
     del: 'Удалить',
   },
+  typesList: {
+    emptyMessage: 'Список расходов пуст',
+  },
 };
 export default local;
