@@ -3,6 +3,11 @@ import Button from '../button';
 import './progress.scss';
 import Local from '../../locale';
 
+const toggleBtnOpen = () => {
+  const openForm = document.querySelector('.type-add');
+  openForm.classList.toggle('visible');
+};
+
 const Progress = (props) => {
   const locale = Local.progress;
   const localeBtn = Local.btn;
@@ -22,7 +27,7 @@ const Progress = (props) => {
       <div className="summ-block">
         <div className="type-summ">
           <span className="type-summ__total">{props.sum}P</span>
-          <Button label={localeBtn.add} />
+          <Button label={localeBtn.add} onClick={toggleBtnOpen} />
         </div>
       </div>
     </div>

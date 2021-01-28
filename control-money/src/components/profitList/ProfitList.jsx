@@ -27,10 +27,12 @@ class ProfitList extends React.Component {
     console.log('id', id);
   };
 
-  addType = (total) => {
+  addType = (total, categoryValue, inputHeaderValue) => {
     controlRequest
-      .post('./types/profit/', {
+      .post('/types/profit/', {
         total,
+        categoryValue,
+        inputHeaderValue,
       })
       .then((response) => {
         if (response.data.status === 'OK') {
@@ -69,7 +71,7 @@ class ProfitList extends React.Component {
                 ) : (
                   this.state.profit.map((item) => (
                     <TypeElement
-                      category={item.category}
+                      category={item.categoryValue}
                       total={Number(item.total)}
                       percent={Math.round((item.total / sum) * 100)}
                       completed={item.combined}

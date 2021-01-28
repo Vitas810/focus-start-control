@@ -16,6 +16,7 @@ class TypeElement extends React.Component {
         </div>
         <span className="type-item__text">{this.props.percent}%</span>
         <span className="type-item__text">{this.props.total}P</span>
+
         <DeleteIcon
           className="delete-icon"
           onClick={() => {
