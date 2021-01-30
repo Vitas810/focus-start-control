@@ -5,13 +5,16 @@ import Local from '../../locale';
 
 const toggleBtnOpen = () => {
   const openForm = document.querySelector('.type-add');
-  openForm.classList.toggle('visible');
+  const clouseElements = document.querySelector('.type-items');
+  openForm.classList.add('visible');
+  clouseElements.classList.add('clouse');
 };
 
 const Progress = (props) => {
   const locale = Local.progress;
   const localeBtn = Local.btn;
-  console.log('sssss', props);
+  console.log('propsProgress', props);
+  let colorProgres = Array.from(props.profit);
   return (
     <div className="progres-types">
       <div className="type-date">
@@ -20,8 +23,16 @@ const Progress = (props) => {
         <span className="type-date__item">{locale.month}</span>
       </div>
 
-      <div className="progress-wrap">
-        <div className="progress-bar half"></div>
+      <div className="progress">
+        {colorProgres.map((item) => (
+          <div
+            key={item.id}
+            style={{
+              background: ` ${item.colorCategor}`,
+              width: `${(item.total / props.sum) * 100}%`,
+            }}
+          ></div>
+        ))}
       </div>
 
       <div className="summ-block">

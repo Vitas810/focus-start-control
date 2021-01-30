@@ -6,7 +6,7 @@ import controlRequest from '../../api/api';
 import './addType.scss';
 
 class AddType extends React.Component {
-  state = { total: '', category: [] };
+  state = { total: '', categorys: [] };
 
   static propTypes = {
     addType: PropTypes.func.isRequired,
@@ -14,31 +14,47 @@ class AddType extends React.Component {
 
   componentDidMount() {
     controlRequest.get('/types/category').then((response) => {
-      const category = response.data.data;
-      this.setState({ category });
+      const categorys = response.data.data;
+      this.setState({ categorys });
     });
   }
 
   addType = () => {
     const { addType } = this.props;
-    let { total, categoryValue, inputHeaderValue } = this.state;
+    let {
+      total,
+      categoryValue,
+      inputHeaderValue,
+      srcImgCat,
+      colorCategor,
+    } = this.state;
     total = Number(total);
 
-    addType(total, categoryValue, inputHeaderValue);
+    addType(total, categoryValue, inputHeaderValue, srcImgCat, colorCategor);
   };
 
   handleInput = (event) => {
     this.setState({ total: event.target.value });
   };
   handleRadioCategory = (event) => {
-    this.setState({ categoryValue: event.target.value });
+    let categorFind = this.state.categorys.find(
+      (id) => id.id === event.target.id
+    );
+    this.setState({
+      categoryValue: event.target.value,
+      colorCategor: categorFind.color,
+      srcImgCat: categorFind.src,
+    });
+    console.log('idCategory', event.target.id);
   };
   handleRadioHeader = (event) => {
     this.setState({ inputHeaderValue: event.target.value });
   };
   toggleBtnClouse = () => {
     const clouseForm = document.querySelector('.type-add');
+    const openElements = document.querySelector('.type-items');
     clouseForm.classList.toggle('visible');
+    openElements.classList.remove('clouse');
   };
 
   render() {
@@ -47,10 +63,11 @@ class AddType extends React.Component {
     const { total, categoryValue, inputHeaderValue } = this.state;
     console.log('categoryValue', categoryValue);
     console.log('inputHeaderValue', inputHeaderValue);
+
     return (
       <form>
         <div className="type-add">
-          <ul className="header-block-menu">
+          <ul className="add-block-menu">
             <li>
               <input
                 id="22"
@@ -74,28 +91,42 @@ class AddType extends React.Component {
               <label htmlFor="11">{localeHeader.expense}</label>
             </li>
           </ul>
-          <button onClick={this.toggleBtnClouse}> Закрыть</button>
+          <Button
+            className="add-btn__clouse"
+            onClick={this.toggleBtnClouse}
+            label={locale.clouse}
+          />
 
-          <input type="text" value={total} onChange={this.handleInput} />
+          <input
+            className="add-block__input"
+            type="number"
+            value={total}
+            onChange={this.handleInput}
+            placeholder="Введите сумму"
+          />
 
           <div className="type-add__items">
-            {this.state.category.map((item) => (
-              <div className="type-add__item" key={item.id}>
-                <img src={item.src} alt={item.category} />
+            {this.state.categorys.map((category) => (
+              <div className="type-add__item" key={category.id}>
+                <img src={category.src} alt={category.category} />
                 <input
-                  id={item.id}
+                  id={category.id}
                   type="radio"
                   name="types"
-                  checked={this.state.categoryValue === item.category}
-                  value={item.category}
+                  checked={this.state.categoryValue === category.category}
+                  value={category.category}
                   onChange={this.handleRadioCategory}
                 />
-                <label htmlFor={item.id}>{item.category}</label>
+                <label htmlFor={category.id}>{category.category}</label>
               </div>
             ))}
           </div>
 
-          <Button onClick={this.addType} label={locale.add} />
+          <Button
+            className="summ-block__btn type-btn"
+            onClick={this.addType}
+            label={locale.add}
+          />
         </div>
       </form>
     );

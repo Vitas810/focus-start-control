@@ -11,6 +11,7 @@ const local = {
   btn: {
     add: 'Добавить',
     del: 'Удалить',
+    clouse: 'X',
   },
   typesList: {
     emptyMessage: 'Список расходов пуст',

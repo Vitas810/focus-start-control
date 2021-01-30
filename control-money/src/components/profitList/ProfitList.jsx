@@ -27,12 +27,20 @@ class ProfitList extends React.Component {
     console.log('id', id);
   };
 
-  addType = (total, categoryValue, inputHeaderValue) => {
+  addType = (
+    total,
+    categoryValue,
+    inputHeaderValue,
+    srcImgCat,
+    colorCategor
+  ) => {
     controlRequest
       .post('/types/profit/', {
         total,
         categoryValue,
         inputHeaderValue,
+        srcImgCat,
+        colorCategor,
       })
       .then((response) => {
         if (response.data.status === 'OK') {
@@ -64,7 +72,7 @@ class ProfitList extends React.Component {
         <main>
           <div className="container">
             <div className="wrapper">
-              <Progress sum={sum} />
+              <Progress sum={sum} profit={this.state.profit} />
               <div className="type-items">
                 {this.state.profit.length === 0 ? (
                   <div>{locale.emptyMessage}</div>
@@ -75,8 +83,10 @@ class ProfitList extends React.Component {
                       total={Number(item.total)}
                       percent={Math.round((item.total / sum) * 100)}
                       completed={item.combined}
+                      src={item.srcImgCat}
                       id={item.id}
                       key={item.id}
+                      color={item.colorCategor}
                       deleteType={this.deleteType}
                     />
                   ))

@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './typeElement.scss';
-import IconsSvg from '../iconsSvg/iconsSvg';
 import { ReactComponent as DeleteIcon } from './delete.svg';
 
 class TypeElement extends React.Component {
@@ -9,8 +8,11 @@ class TypeElement extends React.Component {
     return (
       <div className="type-item">
         <div className="type-items__elem">
-          <div className="cat-circle">
-            <IconsSvg name="food" color="#fff" size="40" classNameName="icon" />
+          <div
+            className="cat-circle icon"
+            style={{ backgroundColor: `${this.props.color}` }}
+          >
+            <img src={this.props.src} alt={this.props.category} />
           </div>
           <span className="type-item__title">{this.props.category}</span>
         </div>
