@@ -1,6 +1,8 @@
 import React from 'react';
-import './header.scss';
+import { Link } from 'react-router-dom';
 import Local from '../../locale';
+import './header.scss';
+import { ReactComponent as ReactIcon } from './logo.svg';
 
 const Header = () => {
   const locale = Local.header;
@@ -10,14 +12,15 @@ const Header = () => {
         <div className="wrapper">
           <div className="header-block">
             <div className="logo">
-              <img src="" alt="" />
+              <ReactIcon />
             </div>
             <ul className="header-block-menu">
               <li>
-                <a href="#">{locale.profit}</a>
+                <Link to="/"> {locale.profit} </Link>
               </li>
+
               <li>
-                <a href="#">{locale.expense}</a>
+                <Link to="/expenseList"> {locale.expense} </Link>
               </li>
             </ul>
           </div>

@@ -45,7 +45,6 @@ class AddType extends React.Component {
       colorCategor: categorFind.color,
       srcImgCat: categorFind.src,
     });
-    console.log('idCategory', event.target.id);
   };
   handleRadioHeader = (event) => {
     this.setState({ inputHeaderValue: event.target.value });
@@ -60,9 +59,7 @@ class AddType extends React.Component {
   render() {
     const locale = Locale.btn;
     const localeHeader = Locale.header;
-    const { total, categoryValue, inputHeaderValue } = this.state;
-    console.log('categoryValue', categoryValue);
-    console.log('inputHeaderValue', inputHeaderValue);
+    const { total } = this.state;
 
     return (
       <form>
@@ -76,6 +73,7 @@ class AddType extends React.Component {
                 checked={this.state.inputHeaderValue === 'profit'}
                 value="profit"
                 onChange={this.handleRadioHeader}
+                required
               />
               <label htmlFor="22">{localeHeader.profit}</label>
             </li>
@@ -103,6 +101,7 @@ class AddType extends React.Component {
             value={total}
             onChange={this.handleInput}
             placeholder="Введите сумму"
+            required
           />
 
           <div className="type-add__items">
@@ -116,6 +115,7 @@ class AddType extends React.Component {
                   checked={this.state.categoryValue === category.category}
                   value={category.category}
                   onChange={this.handleRadioCategory}
+                  required
                 />
                 <label htmlFor={category.id}>{category.category}</label>
               </div>

@@ -12,23 +12,11 @@ class Progress extends React.Component {
   };
 
   render() {
-    const locale = Local.progress;
     const localeBtn = Local.btn;
-    console.log('propsProgress', this.props);
     let profits = Array.from(this.props.profit);
 
     return (
       <div className="progres-types">
-        <div className="type-date">
-          <button className="type-date__item" onClick={this.props.filterDays}>
-            {locale.day}
-          </button>
-          <button className="type-date__item" onClick={this.props.filterWeek}>
-            {locale.week}
-          </button>
-          <span className="type-date__item">{locale.month}</span>
-        </div>
-
         <div className="progress">
           {profits.map((item) => (
             <div

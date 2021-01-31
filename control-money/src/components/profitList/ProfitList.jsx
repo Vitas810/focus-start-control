@@ -1,6 +1,5 @@
 import React from 'react';
 import TypeElement from '../typeElemet';
-import Header from '../header';
 import Progress from '../progress';
 import AddType from '../addType';
 import Locale from '../../locale';
@@ -23,54 +22,6 @@ class ProfitList extends React.Component {
     controlRequest.delete('/types/profit/' + id).then((response) => {
       this.setState((prevState) => ({
         profit: prevState.profit.filter((el) => el.id !== id),
-      }));
-    });
-
-    console.log('deleteType');
-    console.log('id', id);
-  };
-
-  filterDays = () => {
-    controlRequest.get('/types/profit/').then((response) => {
-      this.setState((prevState) => ({
-        profit: prevState.profit.filter(
-          (element) => element.date === new Date().toLocaleDateString()
-        ),
-      }));
-    });
-  };
-
-  filterWeek = () => {
-    const beginWeek = new Date().toLocaleDateString();
-    console.log('beginWeek', beginWeek);
-    var m_names = new Array(
-      '01',
-      '02',
-      '03',
-      '04',
-      '05',
-      '06',
-      '07',
-      '08',
-      '09',
-      '10',
-      '11',
-      '12'
-    );
-    var d = new Date();
-    d.setDate(d.getDate() - 6);
-    let curr_date = d.getDate();
-    let curr_month = d.getMonth();
-    let curr_year = d.getFullYear();
-    let endWeek = curr_date + '.' + m_names[curr_month] + '.' + curr_year;
-
-    console.log('endWeek', endWeek);
-
-    controlRequest.get('/types/profit/').then((response) => {
-      this.setState((prevState) => ({
-        profit: prevState.profit.filter(
-          (date) => date.date >= endWeek && date.date <= beginWeek
-        ),
       }));
     });
   };
@@ -110,20 +61,14 @@ class ProfitList extends React.Component {
     let sum;
     sumArray.length !== 0
       ? (sum = sumArray.reduce((a, b) => a + b))
-      : console.log('нет расходов, массив пуст');
+      : (sum = 'Добавьте доходы.');
 
     return (
       <div>
-        <Header />
         <main>
           <div className="container">
             <div className="wrapper">
-              <Progress
-                sum={sum}
-                profit={this.state.profit}
-                filterDays={this.filterDays}
-                filterWeek={this.filterWeek}
-              />
+              <Progress sum={sum} profit={this.state.profit} />
               {message && <Message message={message} />}
               <div className="type-items">
                 {this.state.profit.length === 0 ? (
