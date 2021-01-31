@@ -1,4 +1,8 @@
 const local = {
+  messages: {
+    DEFAULT: 'Что-то пошло не так',
+    NETWORK_ERROR: 'Проверьте соединение с интеренетом',
+  },
   header: {
     profit: 'Доходы',
     expense: 'Расходы',
@@ -14,7 +18,7 @@ const local = {
     clouse: 'X',
   },
   typesList: {
-    emptyMessage: 'Список расходов пуст',
+    emptyMessage: 'Список расходов/доходов пуст',
   },
 };
 export default local;
