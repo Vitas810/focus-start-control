@@ -12,7 +12,9 @@ const Header = () => {
         <div className="wrapper">
           <div className="header-block">
             <div className="logo">
-              <ReactIcon />
+              <Link to="/">
+                <ReactIcon />
+              </Link>
             </div>
             <ul className="header-block-menu">
               <li>
